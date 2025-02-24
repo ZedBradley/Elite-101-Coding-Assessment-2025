@@ -34,12 +34,36 @@ restaurant_tables = [
 #   - Potentially combine adjacent tables if one alone isn't enough for a larger party.
 # ------------------------------------------------------------------------------------
 
-restaurant_tables2 = [
-    [0,        'T1(2)',  'T2(4)',  'T3(2)',  'T4(6)',  'T5(4)',  'T6(2)'],
-    [1,        'x',      'o',      'o',      'o',      'o',      'x'],
-    [2,        'o',      'x',      'o',      'o',      'x',      'o'],
-    [3,        'x',      'x',      'o',      'x',      'o',      'o'],
-    [4,        'o',      'o',      'o',      'x',      'o',      'x'],
-    [5,        'o',      'x',      'o',      'x',      'o',      'o'],
-    [6,        'o',      'o',      'o',      'o',      'x',      'o']
-]
+
+
+    # Level 1
+    # Returns a list of table IDs (or entire objects) that are currently free.
+   def getFreeTables(tables):
+      freeTables = []
+        for j in range(len(tables)):
+            for i in range(len(tables[j])):
+                if tables[i][j] == "o":
+                    freeTables.append(tables[i][0])
+            if len(freeTables) > 0:
+                print(f"Table {j} is available at time slot {freeTables}")
+            freeTables.clear()
+
+
+    # Level 2
+    # Returns the first table ID that can seat 'party_size' and is free,
+    # or None if none found.
+    
+    # Level 3
+    # Returns a list of all table IDs that can seat 'party_size' and are free.
+    
+    # Level 4
+    # Returns a list of table or table combinations that can seat 'party_size'.
+    # Adjacent combos are determined via the table's "neighbors" list.
+    
+    # Example output structure:
+    # [(1,), (3,), (1,2), (3,5)]  # Each tuple is a single table or a pair.
+  
+    # Bonus:
+    # Takes the combos from Level 4 (like [(1,), (2,), (1,2)]) and
+    # prints a more user-friendly message about each result.
+
