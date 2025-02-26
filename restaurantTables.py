@@ -38,16 +38,6 @@ restaurant_tables = [
 
     # Level 1
     # Returns a list of table IDs (or entire objects) that are currently free.
-   def getFreeTables(tables):
-      freeTables = []
-        for j in range(len(tables)):
-            for i in range(len(tables[j])):
-                if tables[i][j] == "o":
-                    freeTables.append(tables[i][0])
-            if len(freeTables) > 0:
-                print(f"Table {j} is available at time slot {freeTables}")
-            freeTables.clear()
-
 
     # Level 2
     # Returns the first table ID that can seat 'party_size' and is free,
