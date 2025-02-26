@@ -18,12 +18,12 @@
 # Shows the structure of the restaurant layout with all tables free ("o" = open).
 restaurant_tables = [
     [0,        'T1(2)',  'T2(4)',  'T3(2)',  'T4(6)',  'T5(4)',  'T6(2)'],
-    [1,        'o',      'o',      'o',      'o',      'o',      'o'],
-    [2,        'o',      'o',      'o',      'o',      'o',      'o'],
-    [3,        'o',      'o',      'o',      'o',      'o',      'o'],
-    [4,        'o',      'o',      'o',      'o',      'o',      'o'],
-    [5,        'o',      'o',      'o',      'o',      'o',      'o'],
-    [6,        'o',      'o',      'o',      'o',      'o',      'o']
+    [1,        'o',      'o',      'o',      'o',      'x',      'x'],
+    [2,        'o',      'x',      'o',      'o',      'o',      'x'],
+    [3,        'x',      'o',      'x',      'o',      'o',      'x'],
+    [4,        'o',      'o',      'x',      'o',      'o',      'o'],
+    [5,        'x',      'o',      'o',      'o',      'o',      'x'],
+    [6,        'x',      'o',      'o',      'o',      'x',      'o']
 ]
 
 # ------------------------------------------------------------------------------------
@@ -33,27 +33,4 @@ restaurant_tables = [
 #   - Check if those tables meet a certain capacity (from the header row, e.g. 'T1(2)')
 #   - Potentially combine adjacent tables if one alone isn't enough for a larger party.
 # ------------------------------------------------------------------------------------
-
-
-
-    # Level 1
-    # Returns a list of table IDs (or entire objects) that are currently free.
-
-    # Level 2
-    # Returns the first table ID that can seat 'party_size' and is free,
-    # or None if none found.
-    
-    # Level 3
-    # Returns a list of all table IDs that can seat 'party_size' and are free.
-    
-    # Level 4
-    # Returns a list of table or table combinations that can seat 'party_size'.
-    # Adjacent combos are determined via the table's "neighbors" list.
-    
-    # Example output structure:
-    # [(1,), (3,), (1,2), (3,5)]  # Each tuple is a single table or a pair.
-  
-    # Bonus:
-    # Takes the combos from Level 4 (like [(1,), (2,), (1,2)]) and
-    # prints a more user-friendly message about each result.
 

@@ -5,9 +5,12 @@
 # Submitting it as your own may violate assignment rules against plagiarism
 # or AI-generated solutions. Use it ethically and responsibly.
 # -----------------------------------------------------------------------------
-import restaurantTables.py
+from restaurantTables import restaurant_tables
 
-
+    
+ # Level 1
+    # Returns a list of table IDs (or entire objects) that are currently free.
+ 
 def getFreeTables(tables):
     freeTables = []
     for j in range(len(tables)):
@@ -18,7 +21,10 @@ def getFreeTables(tables):
             print(f"Table {j} is available at time slot {freeTables}")
         freeTables.clear()
        
-    
+
+ # Level 2
+    # Returns the first table ID that can seat 'party_size' and is free,
+    # or None if none found.  
 def firstOpenWithSeating(tables, partySize):
     timeSlot = []
     goodTable = 0
@@ -32,7 +38,7 @@ def firstOpenWithSeating(tables, partySize):
         goodTable = int(tableSplit2[0])
         if goodTable < partySize:
             i+=1
-         print(f"{tableSplit[0]} can seat {goodTable} people")
+            print(f"{tableSplit[0]} can seat {goodTable} people")
     
     for j in range(len(tables)):
         if tables[j][i] == "o":
@@ -41,6 +47,8 @@ def firstOpenWithSeating(tables, partySize):
     print(f"Table {i} can seat {goodTable} and is available at time slots {timeSlot}")
 
 
+# Level 3
+    # Returns a list of all table IDs that can seat 'party_size' and are free.
 def allOpenWithSeating(tables, partySize):
     timeSlot = []
     goodTable = 0
@@ -62,6 +70,9 @@ def allOpenWithSeating(tables, partySize):
         i+=1
         
 
+# Level 4
+    # Returns a list of table or table combinations that can seat 'party_size'.
+    # Adjacent combos are determined via the table's "neighbors" list.
 def openTableCombos(tables, partySize):
     timeSlot = []
     i = 1
@@ -94,7 +105,7 @@ def openTableCombos(tables, partySize):
 if __name__ == "__main__":
     # Example data
 
-getFreeTables(restaurant_tables)
-firstOpenWithSeating(restaurant_tables, 5)
-allOpenWithSeating(restaurant_tables, 2)
-openTableCombos(restaurant_tables, 4)
+    getFreeTables(restaurant_tables)
+    firstOpenWithSeating(restaurant_tables, 5)
+    allOpenWithSeating(restaurant_tables, 4)
+    openTableCombos(restaurant_tables, 7)
