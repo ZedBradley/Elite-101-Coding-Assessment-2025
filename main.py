@@ -36,9 +36,9 @@ def firstOpenWithSeating(tables, partySize):
         tableSplit = tables[0][i].split("(")
         tableSplit2 = tableSplit[1].split(")")
         goodTable = int(tableSplit2[0])
-        if goodTable < partySize:
-            i+=1
-            print(f"{tableSplit[0]} can seat {goodTable} people")
+        # if goodTable < partySize:
+        #     i+=1
+        #     print(f"{tableSplit[0]} can seat {goodTable} people")
     
     for j in range(len(tables)):
         if tables[j][i] == "o":
@@ -53,9 +53,11 @@ def allOpenWithSeating(tables, partySize):
     timeSlot = []
     goodTable = 0
     i = 1
+    count = 0
     for table in tables:
         if i >= len(tables):
-            print("None")
+            if count == 0:
+                print("None")
             return
         tableSplit = tables[0][i].split("(")
         tableSplit2 = tableSplit[1].split(")")
@@ -65,6 +67,7 @@ def allOpenWithSeating(tables, partySize):
                 if tables[j][i] == "o":
                     timeSlot.append(tables[j][0])
                     j+=1
+                    count += 1
             print(f"Table {i} can seat {goodTable} and is available at time slots {timeSlot}")
             timeSlot.clear()
         i+=1
@@ -105,7 +108,7 @@ def openTableCombos(tables, partySize):
 if __name__ == "__main__":
     # Example data
 
-    getFreeTables(restaurant_tables)
-    firstOpenWithSeating(restaurant_tables, 5)
-    allOpenWithSeating(restaurant_tables, 4)
-    openTableCombos(restaurant_tables, 7)
+    # getFreeTables(restaurant_tables)
+    firstOpenWithSeating(restaurant_tables, 2)
+    # allOpenWithSeating(restaurant_tables, 10)
+    # openTableCombos(restaurant_tables, 7)
