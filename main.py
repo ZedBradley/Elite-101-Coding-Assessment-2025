@@ -32,10 +32,8 @@ def firstOpenWithSeating(tables, partySize):
     count = 0
     while goodTable < partySize:
         if i >= len(tables):
-            print("None")
-            return
-        if i >= len(tables) and count == 0:
-            print("None")
+            if count == 0:
+                print("None")
             return
         tableSplit = tables[0][i].split("(")
         tableSplit2 = tableSplit[1].split(")")
@@ -86,6 +84,8 @@ def openTableCombos(tables, partySize):
     count = 0
     for table in tables:
         if i == len(tables) - 1:
+            if count == 0:
+                print("none")
             return
         tableSplit = tables[0][i].split("(")
         tableSplit2 = tableSplit[1].split(")")
@@ -106,9 +106,7 @@ def openTableCombos(tables, partySize):
             print(f"Tables {i} and {i + 1} can be pushed together to seat {goodTable + rightTableCap}, it is available at time slots {timeSlot}")
             timeSlot.clear()
         i += 1
-        if i == len(tables) - 1 and count == 0:
-            print("none")
-            return
+        
 
 # -----------------------------------------------------------------------------
 # Example usage / testing:
