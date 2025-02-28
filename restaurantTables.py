@@ -33,4 +33,12 @@ restaurant_tables = [
 #   - Check if those tables meet a certain capacity (from the header row, e.g. 'T1(2)')
 #   - Potentially combine adjacent tables if one alone isn't enough for a larger party.
 # ------------------------------------------------------------------------------------
-
+restaurant_tables2 = [
+    [0,        'T1(2)',  'T2(4)',  'T3(2)',  'T4(6)',  'T5(4)',  'T6(2)'],
+    [1,        'x',      'o',      'o',      'o',      'o',      'x'],
+    [2,        'o',      'x',      'o',      'o',      'x',      'o'],
+    [3,        'x',      'x',      'o',      'x',      'o',      'o'],
+    [4,        'o',      'o',      'o',      'x',      'o',      'x'],
+    [5,        'o',      'x',      'o',      'x',      'o',      'o'],
+    [6,        'o',      'o',      'o',      'o',      'x',      'o']
+]

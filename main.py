@@ -6,6 +6,7 @@
 # or AI-generated solutions. Use it ethically and responsibly.
 # -----------------------------------------------------------------------------
 from restaurantTables import restaurant_tables
+from restaurantTables import restaurant_tables2
 
     
  # Level 1
@@ -113,7 +114,7 @@ def openTableCombos(tables, partySize):
 if __name__ == "__main__":
     # Example data
 
-    getFreeTables(restaurant_tables)
-    firstOpenWithSeating(restaurant_tables, 4)
-    allOpenWithSeating(restaurant_tables, 4)
-    openTableCombos(restaurant_tables, 6)
+    getFreeTables(restaurant_tables2)
+    firstOpenWithSeating(restaurant_tables2, 2)
+    allOpenWithSeating(restaurant_tables2, 4)
+    openTableCombos(restaurant_tables2, 5)
