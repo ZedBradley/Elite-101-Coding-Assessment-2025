@@ -27,24 +27,24 @@ def getFreeTables(tables):
     # or None if none found.  
 def firstOpenWithSeating(tables, partySize):
     timeSlot = []
-    goodTable = 0
+    capacity = 0
     i = 1
-    count = 0
-    while goodTable < partySize:
+    while capacity < partySize:
         if i >= len(tables):
-            if count == 0:
-                print("None")
+            print("None")
             return
         tableSplit = tables[0][i].split("(")
         tableSplit2 = tableSplit[1].split(")")
-        goodTable = int(tableSplit2[0])
-        
+        capacity = int(tableSplit2[0])
+        if capacity < partySize:
+            i+=1
+
     for j in range(len(tables)):
         if tables[j][i] == "o":
             timeSlot.append(tables[j][0])
             j+=1
-            count+=1
-    print(f"Table {i} can seat {goodTable} and is available at time slots {timeSlot}")
+    print(f"Table {i} can seat {capacity} and is available at time slots {timeSlot}")
+      
     
 
 # Level 3
@@ -114,6 +114,6 @@ if __name__ == "__main__":
     # Example data
 
     getFreeTables(restaurant_tables)
-    firstOpenWithSeating(restaurant_tables, 8)
-    allOpenWithSeating(restaurant_tables, 8)
-    openTableCombos(restaurant_tables, 111)
+    firstOpenWithSeating(restaurant_tables, 4)
+    allOpenWithSeating(restaurant_tables, 4)
+    openTableCombos(restaurant_tables, 6)
