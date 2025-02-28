@@ -7,6 +7,21 @@
 # -----------------------------------------------------------------------------
 from restaurantTables import restaurant_tables
 from restaurantTables import restaurant_tables2
+import unittest
+
+class testTableMethods(unittest.TestCase):
+    def testLevel1(self):
+        self.assertEqual(getFreeTables(restaurant_tables), "yes")
+
+    def testLevel2(self):
+        self.assertEqual(firstOpenWithSeating(restaurant_tables, 33), "none")
+
+    def testLevel3(self):
+        self.assertEqual(allOpenWithSeating(restaurant_tables, 33), "none")
+
+    def testLevel4(self):
+        self.assertEqual(openTableCombos(restaurant_tables, 33), "none")
+
 
     
  # Level 1
@@ -21,6 +36,7 @@ def getFreeTables(tables):
         if len(freeTables) > 0:
             print(f"Table {j} is available at time slot {freeTables}")
         freeTables.clear()
+    return "yes"
        
 
  # Level 2
@@ -33,7 +49,7 @@ def firstOpenWithSeating(tables, partySize):
     while capacity < partySize:
         if i >= len(tables):
             print("None")
-            return
+            return "none"
         tableSplit = tables[0][i].split("(")
         tableSplit2 = tableSplit[1].split(")")
         capacity = int(tableSplit2[0])
@@ -45,7 +61,6 @@ def firstOpenWithSeating(tables, partySize):
             timeSlot.append(tables[j][0])
             j+=1
     print(f"Table {i} can seat {capacity} and is available at time slots {timeSlot}")
-      
     
 
 # Level 3
@@ -59,7 +74,7 @@ def allOpenWithSeating(tables, partySize):
         if i >= len(tables):
             if count == 0:
                 print("None")
-            return
+                return "none"
         tableSplit = tables[0][i].split("(")
         tableSplit2 = tableSplit[1].split(")")
         goodTable = int(tableSplit2[0])
@@ -72,7 +87,6 @@ def allOpenWithSeating(tables, partySize):
             print(f"Table {i} can seat {goodTable} and is available at time slots {timeSlot}")
             timeSlot.clear()
         i+=1
-        
 
 # Level 4
     # Returns a list of table or table combinations that can seat 'party_size'.
@@ -87,16 +101,15 @@ def openTableCombos(tables, partySize):
         if i == len(tables) - 1:
             if count == 0:
                 print("none")
+                return "none"
             return
         tableSplit = tables[0][i].split("(")
         tableSplit2 = tableSplit[1].split(")")
         goodTable = int(tableSplit2[0])
-        # print(f"main table {i}: {goodTable}")
         
         rightTableSplit = tables[0][i+1].split("(")
         rightTableSplit2 = rightTableSplit[1].split(")")
         rightTableCap = int(rightTableSplit2[0])
-        # print(f"right neighbor: {rightTableCap}")
         
         if (goodTable + rightTableCap) >= partySize:
             for j in range(len(tables)):
@@ -113,8 +126,8 @@ def openTableCombos(tables, partySize):
 # Example usage / testing:
 if __name__ == "__main__":
     # Example data
-
-    getFreeTables(restaurant_tables2)
-    firstOpenWithSeating(restaurant_tables2, 2)
-    allOpenWithSeating(restaurant_tables2, 4)
-    openTableCombos(restaurant_tables2, 5)
+    unittest.main()
+    # getFreeTables(restaurant_tables2)
+    # firstOpenWithSeating(restaurant_tables2, 2)
+    # allOpenWithSeating(restaurant_tables2, 4)
+    # openTableCombos(restaurant_tables2, 5)
