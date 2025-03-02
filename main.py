@@ -22,21 +22,21 @@ class testTableMethods(unittest.TestCase):
     def testLevel4(self):
         self.assertEqual(openTableCombos(restaurant_tables, 33), "none")
 
-
     
  # Level 1
     # Returns a list of table IDs (or entire objects) that are currently free.
  
 def getFreeTables(tables):
     freeTables = []
-    for j in range(len(tables)):
-        for i in range(len(tables[j])):
-            if tables[i][j] == "o":
-                freeTables.append(tables[i][0])
-        if len(freeTables) > 0:
+    # loop through time slots
+    for j in range(len(tables)): #j - column
+        for i in range(len(tables[j])): #i - row
+            if tables[i][j] == "o": 
+                freeTables.append(tables[i][0]) #add time to new list
+        if len(freeTables) > 0: #make surethere are times
             print(f"Table {j} is available at time slot {freeTables}")
-        freeTables.clear()
-    return "yes"
+        freeTables.clear() #make room for next tables times
+    return "yes" #for unit testing
        
 
  # Level 2
@@ -45,20 +45,20 @@ def getFreeTables(tables):
 def firstOpenWithSeating(tables, partySize):
     timeSlot = []
     capacity = 0
-    i = 1
+    i = 1 #skip restaurant_tables[0][0]
     while capacity < partySize:
-        if i >= len(tables):
+        if i >= len(tables): #keep in bounds
             print("None")
-            return "none"
-        tableSplit = tables[0][i].split("(")
-        tableSplit2 = tableSplit[1].split(")")
-        capacity = int(tableSplit2[0])
-        if capacity < partySize:
+            return "none" #for unit test
+        tableSplit = tables[0][i].split("(") #isolate capacity
+        tableSplit2 = tableSplit[1].split(")") #isolate capacity
+        capacity = int(tableSplit2[0]) #convert capacity to int
+        if capacity < partySize: #check if cap meets party size
             i+=1
 
-    for j in range(len(tables)):
-        if tables[j][i] == "o":
-            timeSlot.append(tables[j][0])
+    for j in range(len(tables)): #loop throught list
+        if tables[j][i] == "o": #use variable i for column to keep table from above
+            timeSlot.append(tables[j][0]) #add time if available
             j+=1
     print(f"Table {i} can seat {capacity} and is available at time slots {timeSlot}")
     
@@ -67,58 +67,58 @@ def firstOpenWithSeating(tables, partySize):
     # Returns a list of all table IDs that can seat 'party_size' and are free.
 def allOpenWithSeating(tables, partySize):
     timeSlot = []
-    goodTable = 0
-    i = 1
-    count = 0
+    capacity = 0
+    i = 1 #skip restaurant_tables[0][0]
+    count = 0 #print none if count == 0
     for table in tables:
         if i >= len(tables):
-            if count == 0:
+            if count == 0: #print none if count == 0
                 print("None")
-                return "none"
-        tableSplit = tables[0][i].split("(")
-        tableSplit2 = tableSplit[1].split(")")
-        goodTable = int(tableSplit2[0])
-        if goodTable >= partySize:
-            for j in range(len(tables)):
-                if tables[j][i] == "o":
-                    timeSlot.append(tables[j][0])
-                    j+=1
-                    count += 1
-            print(f"Table {i} can seat {goodTable} and is available at time slots {timeSlot}")
-            timeSlot.clear()
-        i+=1
+                return "none" #for unit testing
+            return #end loop
+        tableSplit = tables[0][i].split("(") #isolate capacity
+        tableSplit2 = tableSplit[1].split(")") #isolate capacity
+        capacity = int(tableSplit2[0]) #convert capacity to int 
+        if capacity >= partySize: #check if cap meets party size
+            for j in range(len(tables)): #loop through list
+                if tables[j][i] == "o": #use variable i as column to keep table from above
+                    timeSlot.append(tables[j][0]) #add time if available
+                    j+=1 #next time slot
+                    count += 1 
+            print(f"Table {i} can seat {capacity} and is available at time slots {timeSlot}")
+            timeSlot.clear() #prep for next table 
+        i+=1 #next table
 
 # Level 4
     # Returns a list of table or table combinations that can seat 'party_size'.
     # Adjacent combos are determined via the table's "neighbors" list.
 def openTableCombos(tables, partySize):
     timeSlot = []
-    i = 1
-    left = i - 1
-    right = i + 1
-    count = 0
-    for table in tables:
-        if i == len(tables) - 1:
-            if count == 0:
+    i = 1 #skip restaurant_tables[0][0]
+    right = i + 1 #get rightside neighbor, only right to avoid duplicates
+    count = 0 #make sure to print none is nothing available
+    for table in tables: #loop through list
+        if i == len(tables) - 1: #stop before out of range
+            if count == 0: #check if any available tables
                 print("none")
-                return "none"
-            return
-        tableSplit = tables[0][i].split("(")
-        tableSplit2 = tableSplit[1].split(")")
-        goodTable = int(tableSplit2[0])
+                return "none" #for unit testing
+            return #end loop
+        tableSplit = tables[0][i].split("(") #isolate capacity
+        tableSplit2 = tableSplit[1].split(")") #isolate capacity
+        tableCap = int(tableSplit2[0]) #convert capacity to int
         
-        rightTableSplit = tables[0][i+1].split("(")
-        rightTableSplit2 = rightTableSplit[1].split(")")
-        rightTableCap = int(rightTableSplit2[0])
+        rightTableSplit = tables[0][right].split("(") #isolate neighbor capacity
+        rightTableSplit2 = rightTableSplit[1].split(")") #isolate neighbor capacity
+        rightTableCap = int(rightTableSplit2[0]) #convert neighbor capacity to int
         
-        if (goodTable + rightTableCap) >= partySize:
-            for j in range(len(tables)):
-                if tables[j][i] == "o" and tables[j][i+1] == "o":
-                    timeSlot.append(tables[j][0])
-                    count += 1
-                j+=1
-            print(f"Tables {i} and {i + 1} can be pushed together to seat {goodTable + rightTableCap}, it is available at time slots {timeSlot}")
-            timeSlot.clear()
+        if (tableCap + rightTableCap) >= partySize: #check if cap meets party size
+            for j in range(len(tables)): #loop through list
+                if tables[j][i] == "o" and tables[j][right] == "o": #check if both tables free
+                    timeSlot.append(tables[j][0]) #add time slot
+                    count += 1 
+                j+=1 #next time slot
+            print(f"Tables {i} and {i + 1} can be pushed together to seat {tableCap + rightTableCap}, it is available at time slots {timeSlot}")
+            timeSlot.clear() #prep for next table
         i += 1
         
 
@@ -126,8 +126,8 @@ def openTableCombos(tables, partySize):
 # Example usage / testing:
 if __name__ == "__main__":
     # Example data
-    unittest.main()
-    # getFreeTables(restaurant_tables2)
-    # firstOpenWithSeating(restaurant_tables2, 2)
-    # allOpenWithSeating(restaurant_tables2, 4)
-    # openTableCombos(restaurant_tables2, 5)
+    # unittest.main() #get familiar with testing
+    getFreeTables(restaurant_tables2)
+    firstOpenWithSeating(restaurant_tables2, 2)
+    allOpenWithSeating(restaurant_tables2, 4)
+    openTableCombos(restaurant_tables2, 10)
