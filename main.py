@@ -70,7 +70,6 @@ def firstOpenWithSeating(tables, partySize):
     # Returns a list of all table IDs that can seat 'party_size' and are free.
 def allOpenWithSeating(tables, partySize):
     timeSlot = []
-    capacity = 0
     i = 1 #skip restaurant_tables[0][0]
     count = 0 #print none if count == 0
     for table in tables:
